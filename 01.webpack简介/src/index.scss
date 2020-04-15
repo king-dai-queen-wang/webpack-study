@@ -1,0 +1,28 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: pink;
+
+  #title{
+    color: pink;
+  }
+}
+
+.div1{
+  width: 300px;
+  height: 300px;
+  background-image: url(./assets/webpack.jpg);
+}
+
+.div2{
+  width: 300px;
+  height: 300px;
+  background-image: url(assets/angular.jfif);
+}
+
+.div3{
+  width: 300px;
+  height: 300px;
+  background-image: url(assets/scss.jpg);
+}

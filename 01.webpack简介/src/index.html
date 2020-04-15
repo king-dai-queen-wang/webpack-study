@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webpack简介</title>
+<!--    <link rel="stylesheet" href="./index.scss">-->
+</head>
+<body>
+    <h1 id="title">hello webpack 5大核心概念</h1>
+    <ul>
+        <li>Entry 入口指示Webpack以哪个文件</li>
+        <li>Output 输出文件，指示webpack打包后的资源bundle输出到哪里去，以及如何命名</li>
+        <li>Loader 翻译官，让webpack能够去处理那些非javascript文件（webpack只认识JavaScript）</li>
+        <li>Plugins 插件，可以用于执行范围更广的任务，插件范围包括，从打包优化和压缩，一直到重新定义环境中的变量等等</li>
+        <li>
+            Mode {
+                development： 会将process.env.NODE_ENV 值设置为development。启动NamedChunksPlug 和NamedModulesPlugin能够让代码本地调试运行的环境
+                production： 会将process.env.NODE_ENV值设置为production。启用FlagDependencyUsagePlugin, FlagIncludedChunksPlugs, ...能够让代码上线运行
+            }
+        </li>
+    </ul>
+    <ul>2. 结论
+        <li>
+            1.webpack 能处理js/json资源。不能处理css/img  等其他资源
+
+        </li>
+        <li>2. 生产环境和开发环境将es6模块化编译成浏览器能认识的别的模块</li>
+        <li>3. 生产环境比开发环境多1个压缩的js代码</li>
+    </ul>
+
+    <div class="div1">1</div>
+    <div class="div2">2</div>
+    <div class="div3">3</div>
+    <img src="./assets/webpack.jpg" alt="">
+<!--    <script src="../build/build.js"></script>-->
+</body>
+</html>
