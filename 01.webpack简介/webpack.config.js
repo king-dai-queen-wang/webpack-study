@@ -13,11 +13,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 //    webpack配置
 //     入口文件
-    entry: './src/index.js',
+    entry: './src/js/index.js',
 //     输出
     output: {
-    //    输出的文件名
-        filename: 'build.js',
+    //    输出的文件位置
+        filename: 'js/build.js',
     //    输出路径,__dirname是nodejs变量，代表当前文件的目录觉得路径。即 C:\project\webpack-study\01.webpack简介，+ build
         path: resolve(__dirname, 'build')
     },
@@ -46,11 +46,16 @@ module.exports = {
                     'css-loader',
                     // 1.先用scss-loader处理成为css
                     'sass-loader'
-                ]
+                ],
+                // 这里样式文件会编译css，再加到style上去，并不会输出，所以样式文件没有输出参数，即一下无效，会报错
+                // options: {
+                //     // 输出的目录
+                //     outputPath: 'scss'
+                // }
             },
             // 以下这种有问题，不能处理html里面引入的图片
             {
-                test: /\.(jpg|pang|gif|jfif)$/,
+                test: /\.(jpg|png|gif|jfif)$/,
                 loader: 'url-loader',
                 // 配置的参数
                 options: {
@@ -65,12 +70,24 @@ module.exports = {
                     esModule: false,
                 //    如果觉得图片的hash名字太长，取hash值的前10位
                 //    [ext]取原来的文件名做为扩展名
-                    name: '[hash:10].[ext]'
+                    name: '[hash:10].[ext]',
+                    // 指定输出的位置
+                    outputPath: 'assets/img/'
                 }
             }, {
                 test: /\.html$/,
                 // z专门处理html引入的的img图片，从而被url-loader进行处理
                 loader: 'html-loader'
+            },
+            {
+                // exclue 排除css|js|html|scss|json|jpg|png|gif|jfif结尾的资源，如字体文件，等其他资源文件用file-loader处理
+                exclude: /\.(css|js|html|scss|json|jpg|png|gif|jfif)$/,
+                // 原封不动的输出出去
+                loader: 'file-loader',
+                options: {
+                    // 指定输出位置
+                    outputPath: 'media'
+                }
             }
         ]
     },
@@ -85,4 +102,18 @@ module.exports = {
     ],
     mode: 'development', // 开发模式
 //    mode: 'production, // 生产模式
+
+//    开发服务器，用来自动化的（自动编译，自动打开浏览器，自动刷新浏览器）
+//    特点： 只会在内存中编译打包，不会有任何输出
+//    启动devServer指令为： npx webpack-dev-server 【！！！】
+    devServer: {
+        // 要运行的代码目录dist里的代码
+        contentBase: resolve(__dirname, 'build'),
+        // 启动gzip压缩
+        compress: true,
+        // 端口号
+        port: 3000,
+        // 自动打开浏览器
+        open: true
+    }
 };
