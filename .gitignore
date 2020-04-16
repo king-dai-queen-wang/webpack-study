@@ -1,3 +1,5 @@
 ﻿/node_modules/
 /01.webpack-dev-mode/build/
 /.idea/
+/02.webpack-prod-mode/build/
+/03.webpack-eslint/build/
